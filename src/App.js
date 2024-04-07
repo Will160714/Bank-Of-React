@@ -40,7 +40,7 @@ class App extends Component {
     // Await for promise (completion) returned from API call for Credit Card information
     try{  // Accept success response as array of JSON objects (credit card info)
       let response = await axios.get("https://johnnylaicode.github.io/api/credits.json");
-      this.setState({creditList: response}); //Storing received data into state's creditList
+      this.setState({creditList: response.data}); //Storing received data into state's creditList
     }
 
     catch(error){ // Print out errors at console when there is an error response
@@ -54,7 +54,7 @@ class App extends Component {
     // Await for promise (completion) returned from API call for Debit Card information
     try{ // Accept success response as array of JSON objects (debit card info)
       let response = await axios.get("https://johnnylaicode.github.io/api/debits.json");
-      this.setState({debitList: response}); //Storing received data into state's debitList
+      this.setState({debitList: response.data}); //Storing received data into state's debitList
     }
 
     catch(error){ // Print out errors at console when there is an error response
