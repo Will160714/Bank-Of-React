@@ -6,6 +6,7 @@ It contains the top-level state.
 ==================================================*/
 import React, {Component} from 'react';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import axios from 'axios';
 
 // Import other components
 import Home from './components/Home';
@@ -33,6 +34,36 @@ class App extends Component {
     const newUser = {...this.state.currentUser};
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser})
+  }
+
+  async componentDidMount(){
+    // Await for promise (completion) returned from API call for Credit Card information
+    try{  // Accept success response as array of JSON objects (credit card info)
+      let response = await axios.get("https://johnnylaicode.github.io/api/credits.json");
+      this.setState({creditList: response.data}); //Storing received data into state's creditList
+    }
+
+    catch(error){ // Print out errors at console when there is an error response
+      if (error.response) {
+        // The request was made, and the server responded with error message and status code.
+        console.log(error.response.data);  // Print out error message (e.g., Not Found)
+        console.log(error.response.status);  // Print out error status code (e.g., 404)
+      }    
+    }
+
+    // Await for promise (completion) returned from API call for Debit Card information
+    try{ // Accept success response as array of JSON objects (debit card info)
+      let response = await axios.get("https://johnnylaicode.github.io/api/debits.json");
+      this.setState({debitList: response.data}); //Storing received data into state's debitList
+    }
+
+    catch(error){ // Print out errors at console when there is an error response
+      if (error.response) {
+        // The request was made, and the server responded with error message and status code.
+        console.log(error.response.data);  // Print out error message (e.g., Not Found)
+        console.log(error.response.status);  // Print out error status code (e.g., 404)
+      }    
+    }
   }
 
   // Create Routes and React elements to be rendered using React components
