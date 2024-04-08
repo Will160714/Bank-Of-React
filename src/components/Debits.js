@@ -6,6 +6,7 @@ Note: You need to work on this file for the Assignment.
 ==================================================*/
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
+import AccountBalance from './AccountBalance';
 
 const Debits = (props) => {
   // Create the list of Debit items
@@ -39,12 +40,12 @@ const Debits = (props) => {
   return (
     <div>
       <h1>Debits</h1>
-      <h1>{props.balance}</h1>
+      <h1><AccountBalance accountBalance={props.balance}/></h1>
       {debitsView()}
 
       <form onSubmit={handleSubmit}>
-        <input type="text" name="description" value = {description} onChange = {updateDescription}/>
-        <input type="text" name="amount" value = {amount} onChange = {updateAmount}/>
+        <input type="text" name="description" value = {description} placeholder="Description" onChange = {updateDescription}/>
+        <input type="text" name="amount" value = {amount} placeholder="Amount" onChange = {updateAmount}/>
         <button type="submit">Add Debit</button>
       </form>
       <br/>
