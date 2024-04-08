@@ -133,6 +133,8 @@ class App extends Component {
       creditList: [...prevState.creditList, newCredit]
     }));
     event.target.reset();
+    const credit = Math.round(amount * 100) / 100;
+    this.updateBalance(credit)
   }
 
   // Create Routes and React elements to be rendered using React components
@@ -143,7 +145,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
-    const CreditsComponent = () => (<Credits credits={this.state.creditList} addCredit={this.addCredit}/>) 
+    const CreditsComponent = () => (<Credits credits={this.state.creditList} addCredit={this.addCredit} balance={this.state.accountBalance}/>) 
     const DebitsComponent = () => (<Debits debits={this.state.debitList} addDebit={this.addDebit} balance = {this.state.accountBalance}/>) 
 
 
