@@ -35,12 +35,45 @@ class App extends Component {
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser})
   }
+  
+  addDebit = (description, amount) => {
+    const formAmount = Number(amount);
+    const amountProperDigits = Math.round(formAmount * 100) / 100;
+
+    const submissionDate = new Date();
+    const year = submissionDate.getFullYear();
+    const day = String(submissionDate.getDate()).padStart(2,'0');
+    const month = String(submissionDate.getMonth() + 1).padStart(2,'0');
+
+    const time = year + "-" + month + "-" + day;
+
+    const newSubmission = {
+      id: this.state.debitList.length + 1,
+      description: description,
+      amount: amountProperDigits,
+      date: time
+    };
+
+    this.setState(prevState => ({
+      debitList: [...prevState.debitList, newSubmission]
+    })); 
+
+    const debit = -1 * amountProperDigits;
+    this.updateBalance(debit);
+  }
+
+  updateBalance = (amount) => {
+    this.setState(prevState => ({
+      accountBalance: prevState.accountBalance + amount
+    })); 
+  }
 
   async componentDidMount(){
     // Await for promise (completion) returned from API call for Credit Card information
     try{  // Accept success response as array of JSON objects (credit card info)
       let response = await axios.get("https://johnnylaicode.github.io/api/credits.json");
       this.setState({creditList: response.data}); //Storing received data into state's creditList
+      console.log(this.state.creditList);
     }
 
     catch(error){ // Print out errors at console when there is an error response
@@ -64,6 +97,20 @@ class App extends Component {
         console.log(error.response.status);  // Print out error status code (e.g., 404)
       }    
     }
+
+    let credit = 0;
+    this.state.creditList.forEach((obj) => {
+      credit += obj.amount;
+    });
+
+    let debit = 0;
+    this.state.debitList.forEach((obj) => {
+      debit += obj.amount;
+    });
+
+    this.setState({
+      accountBalance: credit - debit
+    });
   }
 
   // add a Credit from form to the creditList
@@ -97,7 +144,8 @@ class App extends Component {
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
     const CreditsComponent = () => (<Credits credits={this.state.creditList} addCredit={this.addCredit}/>) 
-    const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
+    const DebitsComponent = () => (<Debits debits={this.state.debitList} addDebit={this.addDebit} balance = {this.state.accountBalance}/>) 
+
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
