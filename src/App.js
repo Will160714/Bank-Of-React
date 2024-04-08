@@ -14,6 +14,9 @@ import UserProfile from './components/UserProfile';
 import LogIn from './components/Login';
 import Credits from './components/Credits';
 import Debits from './components/Debits';
+import {Link} from 'react-router-dom';
+import logo from '../src/assets/ReactLogo.png'; 
+import "../src/App.css";
 
 class App extends Component {
   constructor() {  // Create and initialize state
@@ -153,6 +156,17 @@ class App extends Component {
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
       <Router basename="/bank-of-react-starter-code">
+        <div class = "header">
+          <div class = "logo-section">
+            <img src = {logo} alt = "logo" class = "logo"></img>
+            <h1>Bank of React</h1>
+          </div>
+          <div class = "navigation">
+            <Link to="/" class = "nav-link">Home</Link>
+            <Link to="/userProfile" class = "nav-link">User Profile</Link>
+            <Link to="/login" class = "nav-link">Login</Link>
+          </div>
+        </div>
         <div>
           <Route exact path="/" render={HomeComponent}/>
           <Route exact path="/userProfile" render={UserProfileComponent}/>
