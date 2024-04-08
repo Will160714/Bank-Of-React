@@ -64,7 +64,7 @@ class App extends Component {
 
   updateBalance = (amount) => {
     this.setState(prevState => ({
-      accountBalance: prevState.accountBalance + amount
+      accountBalance: Math.round((prevState.accountBalance + amount) * 100) / 100
     })); 
   }
 
