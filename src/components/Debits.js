@@ -7,6 +7,7 @@ Note: You need to work on this file for the Assignment.
 import { useState } from 'react';
 import {Link} from 'react-router-dom';
 import AccountBalance from './AccountBalance';
+import "./Card.css"
 
 const Debits = (props) => {
   // Create the list of Debit items
@@ -40,7 +41,10 @@ const Debits = (props) => {
   // Render the list of Debit items and a form to input new Debit item
   return (
     <div>
-      <h1>Debits</h1>
+      <div class = "banner">
+        <h1>Debits</h1>
+      </div>
+      
       <h1><AccountBalance accountBalance={props.balance}/></h1>
       {debitsView()}
 

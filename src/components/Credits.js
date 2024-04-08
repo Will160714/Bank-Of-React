@@ -6,6 +6,7 @@ Note: You need to work on this file for the Assignment.
 ==================================================*/
 import {Link} from 'react-router-dom';
 import AccountBalance from './AccountBalance';
+import "./Card.css"
 
 const Credits = (props) => {
   // Create the list of Credit items
@@ -22,8 +23,11 @@ const Credits = (props) => {
   // Render the list of Debit items and a form to input new Debit item
   return (
     <div>
-      <h1>Credits</h1>
+      <div class = "banner">
+        <h1>Credits</h1>
+      </div>
       <h1><AccountBalance accountBalance={props.balance}/></h1>
+      
       {creditsView()}
 
       <form onSubmit={props.addCredit}>
