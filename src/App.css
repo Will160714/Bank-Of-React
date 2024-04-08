@@ -36,3 +36,37 @@
     transform: rotate(360deg);
   }
 }
+
+.header{
+  background-color: darkslategrey;
+  padding: 10px;
+  display: flex;
+  color: white;
+  justify-content: space-between; 
+}
+
+.logo-section, .navigation{
+  display: inline-flex;
+}
+
+.logo{
+  width: 10%;
+  height: auto;
+  padding-right: 10px;
+}
+
+.navigation{
+  align-items: center !important;
+  justify-content: space-evenly;
+  width: 25%;
+}
+
+.nav-link{
+  color: lightcyan;
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.nav-link:hover{
+  color: lightblue;
+}
