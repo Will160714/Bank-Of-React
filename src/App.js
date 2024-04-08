@@ -38,7 +38,7 @@ class App extends Component {
   
   addDebit = (description, amount) => {
     const formAmount = Number(amount);
-    const amountProperDigits = Math.round(formAmount * 100) / 100;
+    const amountProperDigits = (Math.round(formAmount * 100) / 100).toFixed(2);
 
     const submissionDate = new Date();
     const year = submissionDate.getFullYear();
@@ -64,7 +64,7 @@ class App extends Component {
 
   updateBalance = (amount) => {
     this.setState(prevState => ({
-      accountBalance: prevState.accountBalance + amount
+      accountBalance: Math.round((prevState.accountBalance + amount) * 100) / 100
     })); 
   }
 
@@ -118,7 +118,8 @@ class App extends Component {
     event.preventDefault(); 
     const formData = new FormData(event.target);
     const description = formData.get('description'); 
-    const amount = formData.get('amount'); 
+    const credit = Number(formData.get('amount')); 
+    const amount = (credit).toFixed(2);
     const id = this.state.creditList.length+1
     
     const submissionDate = new Date();
@@ -133,7 +134,7 @@ class App extends Component {
       creditList: [...prevState.creditList, newCredit]
     }));
     event.target.reset();
-    const credit = Math.round(amount * 100) / 100;
+    
     this.updateBalance(credit)
   }
 
