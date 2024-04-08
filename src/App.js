@@ -19,7 +19,7 @@ class App extends Component {
   constructor() {  // Create and initialize state
     super(); 
     this.state = {
-      accountBalance: 1234567.89,
+      accountBalance: 0,
       creditList: [],
       debitList: [],
       currentUser: {
@@ -66,6 +66,28 @@ class App extends Component {
     }
   }
 
+  // add a Credit from form to the creditList
+  addCredit = (event) => {
+    event.preventDefault(); 
+    const formData = new FormData(event.target);
+    const description = formData.get('description'); 
+    const amount = formData.get('amount'); 
+    const id = this.state.creditList.length+1
+    
+    const submissionDate = new Date();
+    const year = submissionDate.getFullYear();
+    const day = String(submissionDate.getDate()).padStart(2,'0');
+    const month = String(submissionDate.getMonth() + 1).padStart(2,'0');
+
+    const date = year + "-" + month + "-" + day;
+
+    const newCredit = {id, description, amount, date}
+    this.setState((prevState) => ({
+      creditList: [...prevState.creditList, newCredit]
+    }));
+    event.target.reset();
+  }
+
   // Create Routes and React elements to be rendered using React components
   render() {  
     // Create React elements and pass input props to components
@@ -74,7 +96,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
-    const CreditsComponent = () => (<Credits credits={this.state.creditList} />) 
+    const CreditsComponent = () => (<Credits credits={this.state.creditList} addCredit={this.addCredit}/>) 
     const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
