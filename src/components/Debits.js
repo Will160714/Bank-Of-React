@@ -20,9 +20,11 @@ const Debits = (props) => {
     });
   }
 
+  //Creating states - description and amount - for the form
   const [description, setDescription] = useState("");
   const [amount, setAmount] = useState("");
 
+  //Adding the submission to debitList, updating the accountBalance, and resetting the form fields to blank
   const handleSubmit = (event) => {
     event.preventDefault();
     props.addDebit(description, amount);
@@ -30,10 +32,12 @@ const Debits = (props) => {
     setAmount('');
   }
 
+  //Updating the description field when changes are made
   const updateDescription = (event) => {
     setDescription(event.target.value);
   }
 
+  //Updating the amount field when changes are made
   const updateAmount = (event) => {
     setAmount(event.target.value);
   }
