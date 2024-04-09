@@ -39,17 +39,20 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
   
+  //Update debitList with the inputs from the Debit Form
   addDebit = (description, amount) => {
+    //Converting amount to Number and rounding it to 2 decimal places
     const formAmount = Number(amount);
     const amountProperDigits = (Math.round(formAmount * 100) / 100).toFixed(2);
 
+    //Getting the submission date in the format of yyyy-mm-dd
     const submissionDate = new Date();
     const year = submissionDate.getFullYear();
     const day = String(submissionDate.getDate()).padStart(2,'0');
     const month = String(submissionDate.getMonth() + 1).padStart(2,'0');
-
     const time = year + "-" + month + "-" + day;
 
+    //Creating a new element for debitList
     const newSubmission = {
       id: this.state.debitList.length + 1,
       description: description,
@@ -57,17 +60,21 @@ class App extends Component {
       date: time
     };
 
+    //Pushing the new element with debitList
     this.setState(prevState => ({
       debitList: [...prevState.debitList, newSubmission]
     })); 
 
+    //Updating the Balance
     const debit = -1 * amountProperDigits;
     this.updateBalance(debit);
   }
 
+  //Updates the accountBalance based on account (negative for debit and positive for credit)
   updateBalance = (amount) => {
     this.setState(prevState => ({
-      accountBalance: Math.round((prevState.accountBalance + amount) * 100) / 100
+      //Ensuring that the account balance is only 2 decimal places
+      accountBalance: Math.round((prevState.accountBalance + amount) * 100) / 100 
     })); 
   }
 
@@ -101,16 +108,19 @@ class App extends Component {
       }    
     }
 
+    //Calculating the total credit from items from the API call
     let credit = 0;
     this.state.creditList.forEach((obj) => {
       credit += obj.amount;
     });
 
+    //Calculating the total debit from items from the API call
     let debit = 0;
     this.state.debitList.forEach((obj) => {
       debit += obj.amount;
     });
 
+    //Setting accountBalance to the actual accountBalance based on API items
     this.setState({
       accountBalance: credit - debit
     });
