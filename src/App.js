@@ -155,7 +155,7 @@ class App extends Component {
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
-      <Router basename="/bank-of-react-starter-code">
+      <Router basename="/assignment-3/">
         <div class = "header">
           <div class = "logo-section">
             <img src = {logo} alt = "logo" class = "logo"></img>
