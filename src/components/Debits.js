@@ -44,9 +44,14 @@ const Debits = (props) => {
       <div class = "banner">
         <h1>Debits</h1>
       </div>
-      
+
       <h1><AccountBalance accountBalance={props.balance}/></h1>
-      {debitsView()}
+      
+      <div class = "list">
+        <div class = "list-items">
+          {debitsView()}
+        </div>
+      </div>
 
       <form onSubmit={handleSubmit}>
         <input type="text" name="description" value = {description} placeholder="Description" onChange = {updateDescription}/>

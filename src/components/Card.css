@@ -6,3 +6,16 @@
     align-items: center;
     font-size: 20px;
 }
+
+.list {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px;
+}
+
+.list-items{
+    text-align: left;
+}
