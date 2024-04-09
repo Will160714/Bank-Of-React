@@ -1,6 +1,6 @@
 # Assignment 3 - Bank of React
-Group Mates: 
-  Patrick Lin (GitHub Username: Will160714)
+Group Mates:\
+  Patrick Lin (GitHub Username: Will160714)\
   Max Koltovskiy (GitHub Username: MacKoltovs)
 
 ### Live Link 
